@@ -30,6 +30,8 @@ function secondCall() {
 setTimeout(secondCall, 1000); // execute this code after 1000 ms
 setTimeout(() => console.log('Third'), 0);
 console.log('Fourth');
+
+// First  , Fourth , Third  , Second
 ```
 
 4.
@@ -42,6 +44,8 @@ function secondCall() {
 setTimeout(secondCall, 1000); // execute this code after 1000 ms
 setTimeout(() => console.log('Third'), 0);
 console.log('Fourth');
+
+// First  , Fourth , Third  , Second
 ```
 
 5. What will be the output of the code below and why? Also write the timing of the output starting with 0 ms.
@@ -60,13 +64,19 @@ setTimeout(function exec() {
 }, 0);
 runWhileLoopForNSeconds(3);
 console.log('Third');
+
+// First Third Second
 ```
 
 6. Convert the synchronous code given below into asynchronous. If you execute this code it will print one, two and three. Change the code in such a way that it should print `one`, `three` and `two`. You are not allowed to move the code up and down.
 
 ```js
 console.log('one');
-console.log('two');
+
+setTimeout(()=>{
+   console.log('two');
+},1000);
+
 console.log('three');
 ```
 
@@ -74,15 +84,20 @@ console.log('three');
 
 ```js
 console.log('one');
-console.log('two');
+setTimeout(()=>{
+   console.log('two');
+},1000);
 console.log('three');
 ```
 
 8. Write a function named `asyncForEach` that is similar to `forEach`. But `asyncForEach` is asynchronous in nature rather than synchronous.
 
 ```js
-funciton asyncForEach(){
+funciton asyncForEach(ary){
   //
+  for (let elm of ary) {
+    console.log(elm);
+  }
 }
 //  Output of the function below should be
 // one
@@ -108,6 +123,9 @@ Convert the code below in such way that the output should be the one below
 
 ```js
 console.log('First Call');
-[1, 2, 3, 4, 5].firEach((num) => console.log(num));
+
+ setTimeout(()=>{
+  console.log([1, 2, 3, 4, 5].forEach((num) => console.log(num));)
+ }) 
 console.log('Last Call');
 ```
