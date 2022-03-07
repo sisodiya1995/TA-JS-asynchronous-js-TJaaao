@@ -13,25 +13,55 @@ let input = document.querySelector('input')
 //     }
 //     xhr.send();  // check the data in console
 
-function displayUI(abc,user) {
+function displayUI(user) {
     githubUser.innerHTML ="";
+   // followers.innerHTML="";
     let img = document.createElement('img');
        img.src = user.avatar_url
     let name = document.createElement('cite');
     name.innerText=user.name
     let userName = document.createElement('p');
     userName.innerText =user.login
+    
+    githubUser.append(img ,name ,userName );
+
+}
+
+function displayFollowers(followerData){
+      
+     followerData.length =5;
+     let followers = document.querySelector('.followers')
     let follower = document.createElement('div');
-       abc.forEach(element => {
+        follower.innerText= "Followers";
+       followerData.forEach(element => {
            let img = document.createElement('img')
            img.src= element;
+           img.style.marginLeft ="10px";
+           img.style.width="100px"
+           img.style.height="100px"
            follower.append(img);
        });
-   follower.innerText=user.followers
-    let following = document.createElement('small');
-    following.innerText=user.following;
-    githubUser.append(img ,name ,userName ,follower ,following);
+       followers.append(follower);
+       
+}
 
+function displayFollowing(followingData){
+ console.log("following");
+
+    followingData.length =5;
+    let followings = document.querySelector('.following')
+   let following = document.createElement('div');
+   
+   following.innerText= "Following"
+      followingData.forEach(element => {
+          let img = document.createElement('img')
+          img.src= element;
+          img.style.marginLeft ="10px";
+          img.style.width="100px"
+          img.style.height="100px"
+          following.append(img);
+      });
+      followings.append(following);
 }
 
     function handleChange(event) {
@@ -44,32 +74,55 @@ function displayUI(abc,user) {
       xhr.onload = function() {
       
            let userData = JSON.parse(xhr.response);
-           displayUI(userData,abc);
+           displayUI(userData);
             event.target.value ="";
           }
           
           xhr.send();
-
+//for follower
           let xhr1 = new XMLHttpRequest();
           xhr1.open('GET' ,`https://api.github.com/users/${event.target.value}/followers`);
           xhr1.onload = function() {
           
                let userData1 = JSON.parse(xhr1.response);
                console.log(userData1);
-             let abc = userData1.reduce((acc , cv) =>{
+             let followerData = userData1.reduce((acc , cv) =>{
                acc.push(cv.avatar_url);
                return acc;
                },[]);
-               console.log(abc);
-               displayUI(abc,userData);
+               console.log(followerData);
+               displayFollowers(followerData);
                 
                // event.target.value ="";
               }
               
               xhr1.send();
+// for following
+              let xhr2 = new XMLHttpRequest();
+              xhr2.open('GET' ,`https://api.github.com/users/${event.target.value}/following`);
+              xhr2.onload = function() {
+              
+                   let userData1 = JSON.parse(xhr2.response);
+                   console.log(userData1);
+                 let followingData = userData1.reduce((acc , cv) =>{
+                   acc.push(cv.avatar_url);
+                   return acc;
+                   },[]);
+                   console.log(followingData);
+                   displayFollowing(followingData);
+                    
+                   // event.target.value ="";
+                  }
+                  
+                  xhr2.send();
+    
+
 
           
       }
+
+
+
 
     
       
@@ -84,25 +137,25 @@ function displayUI(abc,user) {
            
            //for random cats
            function cats(){
-let button =  document.querySelector('button');
+                let button =  document.querySelector('button');
 
 
-button.addEventListener('click' , () =>{
-    let xhr = new XMLHttpRequest();
-    xhr.open('GET' ,`https://api.thecatapi.com/v1/images/search?limit=1&size=full`);
-    xhr.onload = function() {
-         
+                button.addEventListener('click' , () =>{
+                    let xhr = new XMLHttpRequest();
+                    xhr.open('GET' ,`https://api.thecatapi.com/v1/images/search?limit=1&size=full`);
+                    xhr.onload = function() {
+                        
 
-         let user = JSON.parse(xhr.response);
-         let img1 = document.querySelector('img');
-         img1.src=user[0].url;
-         
-        }
-        
-        xhr.send();
+                        let user = JSON.parse(xhr.response);
+                        let img1 = document.querySelector('.cat');
+                        img1.src=user[0].url;
+                        
+                        }
+                        
+                        xhr.send();
 
 
-})
+                })
 
            }
            cats();

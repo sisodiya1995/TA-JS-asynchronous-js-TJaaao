@@ -48,3 +48,8 @@ img{
 button{
     width: 10%;
 }
+div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
