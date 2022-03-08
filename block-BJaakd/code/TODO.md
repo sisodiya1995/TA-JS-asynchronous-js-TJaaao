@@ -6,21 +6,22 @@
 
 let a = new Promise((resolve ,reject) =>{
  setTimeout(() => {
-     resolve(``Promise Resolved!``)
+     resolve(`Promise Resolved!`)
  },1000)
 
-}).then((val) =>console.log(val));
+})
+a.then((val) => console.log(val));
 ```
 
 2. Create another promise. Now have it reject with a value of `Rejected Promise!` without using `setTimeout`. Print the contents of the promise after it has been rejected by passing console.log to `.catch`
 
 ```js
-let b= new Promise((resolve ,reject) =>{
+let b = new Promise((resolve , reject) => {
  
      reject(`Rejected Promise!`);
 
 })
-.catch((val) =>console.log(val));
+b.catch((val) => console.log(val));
 ```
 
 3. Create another promise. Now have it reject with a value of `Rejected Promise!` without using `setTimeout`. Print the contents of the promise after it has been rejected by passing console.log to `.catch` and also use `.finally` to log message `Promise Settled!`.
@@ -32,8 +33,8 @@ let b= new Promise((resolve ,reject) =>{
  },1000)
 
 })
-.catch(() =>console.log(`Promise Settled!`));
-.finally(() =>console.log(`Promise Settled!`));
+.catch(() => console.log(`Promise Settled!`));
+.finally(() => console.log(`Promise Settled!`));
 ```
 
 4. What will be the output of the code below.
@@ -56,14 +57,15 @@ console.log('D');
 
 ```js
 
-function wait(wait) {
+function wait(time) {
   return new Promise((resolve , reject) =>{
     setTimeout(()=> {
         resolve('promise resolve');
-    } ,wait)
+    } , time)
 
   })
 }
+wait(1000).then((msg) => console.log(msg));
 ```
 
 6. Do the following:
@@ -84,9 +86,9 @@ function wait(wait) {
  .then((val) => val+100)
  .then((val) =>{
      if(val > 100){
-         .catch("error messon")
+         throw new Error ('Something went wrong ')
      }
- })
+ }).catch(console.log)
 ```
 
 7. Do the following:
@@ -187,9 +189,14 @@ let first = new Promise((resolve , reject) =>{
 let first = new Promise((resolve , reject) =>{
      resolve("John");
  })
- .then((val) =>{ 
+ .then((val) => { 
      
-      return val +1
+      return Promise.resolve("Arya")
  })
-
+.then((v) => {
+    console.log(v)
+    return new Promise((resolve) =>{
+        setTimeout(() => resolve('Bran') ,1000)
+    })
+}).then(console.log)
 ```
