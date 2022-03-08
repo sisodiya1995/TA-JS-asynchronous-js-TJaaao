@@ -1,19 +1,39 @@
 1. Create a promise. Have it resolve with a value of `Promise Resolved!` in resolve after a delay of 1000ms, using `setTimeout`. Print the contents of the promise after it has been resolved by passing `console.log` to `.then`
 
-```js
+
 // Your code
+```js
+
+let a = new Promise((resolve ,reject) =>{
+ setTimeout(() => {
+     resolve(``Promise Resolved!``)
+ },1000)
+
+}).then((val) =>console.log(val));
 ```
 
 2. Create another promise. Now have it reject with a value of `Rejected Promise!` without using `setTimeout`. Print the contents of the promise after it has been rejected by passing console.log to `.catch`
 
 ```js
-// Your code
+let b= new Promise((resolve ,reject) =>{
+ 
+     reject(`Rejected Promise!`);
+
+})
+.catch((val) =>console.log(val));
 ```
 
 3. Create another promise. Now have it reject with a value of `Rejected Promise!` without using `setTimeout`. Print the contents of the promise after it has been rejected by passing console.log to `.catch` and also use `.finally` to log message `Promise Settled!`.
 
 ```js
-// Your code
+  let a = new Promise((resolve ,reject) =>{
+ setTimeout(() => {
+     reject(`Rejected Promise!`)
+ },1000)
+
+})
+.catch(() =>console.log(`Promise Settled!`));
+.finally(() =>console.log(`Promise Settled!`));
 ```
 
 4. What will be the output of the code below.
@@ -28,15 +48,26 @@ setTimeout(() => console.log('B'), 0); // callback queue
 Promise.resolve().then(() => console.log('C'));
 
 console.log('D');
+
+//Output A,D,C,B
 ```
 
 5. Write a function named `wait` that accepts `time` in ms returns a promise. The promise gets resolved after given time.
 
 ```js
-// Your code
+
+function wait(wait) {
+  return new Promise((resolve , reject) =>{
+    setTimeout(()=> {
+        resolve('promise resolve');
+    } ,wait)
+
+  })
+}
 ```
 
 6. Do the following:
+
 
 - Create a new promise
 - Resolve with 21
@@ -46,7 +77,16 @@ console.log('D');
 - Catch the error using `.catch`
 
 ```js
-// Your code
+ let b = new Promise((resolve , reject) =>{
+     resolve(21);
+ })
+ .then((val) => val +10)
+ .then((val) => val+100)
+ .then((val) =>{
+     if(val > 100){
+         .catch("error messon")
+     }
+ })
 ```
 
 7. Do the following:
@@ -58,7 +98,14 @@ console.log('D');
 - Use `.then` and log the value
 
 ```js
-// Your code
+  
+  let b = new Promise((resolve , reject) =>{
+     resolve(["A"]);
+ })
+ .then((val) => val.concat('B'))
+ .then((val) =>  console.log({...val}));
+ 
+ })
 ```
 
 8. Do the following:
@@ -69,7 +116,25 @@ console.log('D');
 - Chain `.then` on above and return `4` also check the value you get access to by logging
 
 ```js
-// Your code
+
+let first = new Promise((resolve , reject) =>{
+     resolve(1);
+ })
+ .then((val) =>{ 
+     console.log(val +1);
+      return val +1
+ })
+ .then((val) => {
+     console.log(val+1);
+     return val+1
+ })
+ .then((val) => {
+     console.log(val +1);
+      return val +1
+ 
+ })
+    
+
 ```
 
 9. Do the following:
@@ -80,10 +145,35 @@ console.log('D');
 - Use `.then` on `first` and return `4` also check the value you get access to by logging
 
 ```js
-// Your code
+/ let first = new Promise((resolve , reject) =>{
+     resolve(1);
+ })
+ .then((val) =>{ 
+     console.log(val +1);
+      return val +1
+ })
+
+ let first = new Promise((resolve , reject) =>{
+     resolve(1);
+ })
+ .then((val) => {
+     console.log(val+2);
+     return val+2
+ })
+
+ let first = new Promise((resolve , reject) =>{
+     resolve(1);
+ })
+ .then((val) => {
+     console.log(val +3);
+      return val +3
+ 
+ })
 ```
 
 10. Try to understand the difference between the problem 8 and 9. Write your observation.
+
+
 
 11. Do the following
 
@@ -93,5 +183,13 @@ console.log('D');
 - Use `.then` to log the value
 
 ```js
-// Your code
+
+let first = new Promise((resolve , reject) =>{
+     resolve("John");
+ })
+ .then((val) =>{ 
+     
+      return val +1
+ })
+
 ```
