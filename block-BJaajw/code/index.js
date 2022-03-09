@@ -1,5 +1,12 @@
 let news = document.querySelector(".news");
 let form = document.querySelector("form");
+let isLoading = false;
+
+function handleSpineer() {
+  if (isLoading) {
+    news.innerHTML = ` <div class="donut"></div>`;
+  }
+}
 let newsData = fetch(
   "https://api.spaceflightnewsapi.net/v3/articles?_limit=30"
 );
@@ -43,6 +50,8 @@ function displayUI(data2) {
 function handleSelect(event) {
   //event.preventDefault();
   console.log(form.elements.news.value);
+  isLoading = true;
+  handleSpineer();
   let newsData = fetch(
     "https://api.spaceflightnewsapi.net/v3/articles?_limit=30"
   );
