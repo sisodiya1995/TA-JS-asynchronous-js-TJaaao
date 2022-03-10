@@ -1,0 +1,21 @@
+h1{
+    text-align: center;
+    color: white;
+    background-color: black;
+    padding: 15px;
+}
+
+.ui{
+    text-align: center;
+    background-color: bisque;
+    width: 500px;
+    padding: 2rem;
+    margin: 0 auto;
+}
+
+ul{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 2px dashed rebeccapurple;
+}
